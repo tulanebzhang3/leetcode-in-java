@@ -1,0 +1,22 @@
+1207. Unique Number of Occurrences
+Given an array of integers arr, write a function that returns true if and only if the number of occurrences of each value 
+in the array is unique.
+
+class Solution {
+    public boolean uniqueOccurrences(int[] arr) {
+        HashMap < Integer, Integer >map = new HashMap();
+        for (int num : arr){
+            if (map.get(num) ==null){
+                map.put(num, 1);
+            } else {
+                map.put(num, map.get(num)+1);
+            }
+        }
+        HashSet <Integer> set = new HashSet();
+        for (Integer value: map.values()){
+            set.add(value);
+        }
+        return set.size() == map.size();
+    }
+}
+
