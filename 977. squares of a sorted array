@@ -1,0 +1,43 @@
+977. squares of a sorted array
+Given an array of integers A sorted in non-decreasing order, return an array of the squares of each number, 
+also in sorted non-decreasing order.
+
+class Solution {
+    public int[] sortedSquares(int[] A) {
+        int l= 0;
+       while(l< A.length && A[l]<0){
+           l++;
+       }
+        for (int i = 0; i< A.length; i++){
+            A[i] *= A[i];
+        }
+         int [] arr = new int[A.length];
+        int k = l-1;
+        int temp = 0;
+        while(k>=0 && l< A.length){
+            if (A[k]<= A[l]){
+                arr[temp] = A[k];
+                temp++;
+                k--;
+            }else{
+                arr[temp] = A [l];
+                temp++;
+                l++;
+            }
+        }
+        while(l< A.length){
+                arr[temp] = A[l];
+                l++;
+                temp++;
+            }
+        
+        
+            while (k>=0 ){
+                arr[temp] = A[k];
+                k--;
+                temp++;
+            }
+        
+        return arr;
+    }
+}
