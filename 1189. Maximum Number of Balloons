@@ -1,0 +1,27 @@
+1189. Maximum Number of Balloons
+Given a string text, you want to use the characters of text to form as many instances of the word "balloon" as possible.  
+You can use each character in text at most once. Return the maximum number of instances that can be formed.
+
+class Solution {
+    public int maxNumberOfBalloons(String text) {
+        int count = 0;
+        ArrayList<Character> arr = new ArrayList();
+        for(char  c: text.toCharArray()){
+            arr.add(c);
+        }
+       boolean flag = true;
+        while(flag == true){
+           for (char c : "balloon".toCharArray()) {
+               flag = arr.remove (Character.valueOf(c));
+               if (flag == false){
+                   break;
+               }
+           }
+            if (flag == true){
+                count++;
+            }
+        }
+        return count;
+        
+    }
+}
