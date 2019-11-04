@@ -1,0 +1,36 @@
+1160. Find Words That Can Be Formed by Characters
+you are given an array of strings words and a string chars.  
+A string is good if it can be formed by characters from chars (each character can only be used once).  
+Return the sum of lengths of all good strings in words.
+
+class Solution {
+    public int countCharacters(String[] words, String chars) {
+        int count = 0;
+        for (String word : words){
+            if(isCharable(word, chars)){
+                count += word.length();
+            }
+        }
+        return count;
+        
+    }
+    
+    public boolean isCharable(String word, String chars){
+        boolean flag = true;
+        ArrayList<Character> arr = new ArrayList();
+        for (char c: chars.toCharArray()){
+            arr.add(c);
+        }
+        for (char c : word.toCharArray()){
+            if (!arr.contains(c)){
+                flag = false;
+                break;
+            } else{
+                arr.remove(Character.valueOf(c));
+            }
+        }
+        return flag;
+        
+    }
+}
+        
