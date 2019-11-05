@@ -1,0 +1,38 @@
+821. Shortest Distance to a Character
+Given a string S and a character C, return an array of integers representing the shortest distance from the character C 
+in the string.
+
+class Solution {
+    public int[] shortestToChar(String S, char C) {
+        int [] arr = new int [S.length()];
+        int countLeft = 0 ;
+        int countRight = 0 ;
+        for (int i = 0; i< S.length(); i++){
+            for (int k = i; k< S.length(); k++){
+                if (S.toCharArray()[k] == C) {
+                    break;
+                } else{
+                    countRight++;
+                }
+                if(countRight + i ==S.length()){
+                    countRight = Integer.MAX_VALUE;
+                }
+            }
+                for (int k = i; k>= 0; k--){
+                if (S.toCharArray()[k] == C) {
+                    break;
+                } else{
+                    countLeft++;
+                }
+                if (countLeft == i+1){
+                    countLeft = Integer.MAX_VALUE;
+                }
+            }
+            arr[i] = Math.min(countLeft, countRight);
+            countLeft = 0;
+            countRight = 0;
+        }
+        return arr;
+    }
+    
+}
