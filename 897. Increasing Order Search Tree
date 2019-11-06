@@ -1,0 +1,39 @@
+897. Increasing Order Search Tree
+Given a binary search tree, rearrange the tree in in-order so that the leftmost node in the tree is now the root of the tree,
+and every node has no left child and only 1 right child.
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public TreeNode increasingBST(TreeNode root) {
+        ArrayList<Integer> arr = new ArrayList();
+        getValue(root, arr);
+        TreeNode newroot = new TreeNode(arr.get(0));
+        TreeNode cur = newroot;
+        for (int i = 1; i< arr.size(); i ++){
+            cur.right = new TreeNode(arr.get(i));
+            cur = cur.right;
+            
+        }
+        return newroot;
+        
+        
+    }
+    
+    public void getValue(TreeNode node, ArrayList<Integer> arr){
+        if (node.left != null){
+            getValue(node.left, arr);
+        }
+    arr.add(node.val);
+        if (node.right != null){
+            getValue(node.right, arr);
+        }
+    
+    }
+}
