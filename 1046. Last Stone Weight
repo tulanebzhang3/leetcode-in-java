@@ -1,0 +1,29 @@
+1046. Last Stone Weight
+
+We have a collection of rocks, each rock has a positive integer weight.  
+Each turn, we choose the two heaviest rocks and smash them together.  
+Suppose the stones have weights x and y with x <= y.  The result of this smash is:  If x == y, 
+both stones are totally destroyed; If x != y, the stone of weight x is totally destroyed, 
+and the stone of weight y has new weight y-x. At the end, there is at most 1 stone left.  
+Return the weight of this stone (or 0 if there are no stones left.)
+
+class Solution {
+    public int lastStoneWeight(int[] stones) {
+     List<Integer> list = new ArrayList();
+        for (int i : stones){
+            list.add(i);
+        }
+        
+        int temp = 0;
+        while (list.size()>1){
+            Collections.sort(list);
+            temp = list.get(list.size()-1)- list.get(list.size()-2);
+            list.remove(list.size()-1);
+            list.remove(list.size()-1);
+            list.add(temp);
+            
+        }
+        return list.get(0);
+        
+    }
+}
