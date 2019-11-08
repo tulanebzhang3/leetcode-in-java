@@ -1,0 +1,36 @@
+496. Next Greater Element I
+You are given two arrays (without duplicates) nums1 and nums2 where nums1’s elements are subset of nums2. 
+Find all the next greater numbers for nums1's elements in the corresponding places of nums2.  
+The Next Greater Number of a number x in nums1 is the first greater number to its right in nums2. 
+If it does not exist, output -1 for this number.
+
+class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int [] arr = new int [nums1.length];
+        int temp = -1;
+        for (int i = 0 ; i < nums1.length; i++){
+            for (int j = indexOf(nums1[i],nums2) ; j< nums2.length; j++){
+                
+                if (nums2[j]> nums1[i]){
+                    temp = nums2[j];
+                    break;
+                }
+            }
+            arr[i] = temp;
+            temp = -1;
+        }
+        return arr;
+    }
+    
+    public int indexOf(int a, int[] arr){
+       int temp = 0;
+        while (temp < arr.length){
+            if (arr[temp]==a){
+                break;
+            }
+        temp++;
+        }
+        return temp;
+        }
+    
+}
