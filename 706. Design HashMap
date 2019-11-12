@@ -1,0 +1,29 @@
+706. Design HashMap
+
+class MyHashMap {
+    int [] arr;
+    boolean[] arrb;
+
+    /** Initialize your data structure here. */
+    public MyHashMap() {
+        arr = new int[1000000];
+        arrb = new boolean[1000000];
+    }
+    
+    /** value will always be non-negative. */
+    public void put(int key, int value) {
+        arr[key] = value;
+        arrb[key] = true;
+    }
+    
+    /** Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key */
+    public int get(int key) {
+        if (arrb[key]){return arr[key];}
+        else{return -1;}
+    }
+    
+    /** Removes the mapping of the specified value key if this map contains a mapping for the key */
+    public void remove(int key) {
+        arrb[key] = false;
+    }
+}
