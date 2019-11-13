@@ -1,0 +1,24 @@
+1013. Partition Array Into Three Parts With Equal Sum
+Given an array A of integers, return true if and only if we can partition the array into three non-empty parts with equal sums.
+
+
+class Solution {
+    public boolean canThreePartsEqualSum(int[] A) {
+        int sum = 0;
+        for (int i : A){
+            sum += i;
+        }
+        if (sum%3!=0) return false;
+        sum /=3;
+        int count = 0;
+        int temp = 0;
+        for (int i : A){
+            temp+= i;
+            if (temp == sum){
+                count++;
+                temp = 0;
+            }
+        }
+        return count==3;
+    }
+}
