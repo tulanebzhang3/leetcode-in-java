@@ -1,0 +1,39 @@
+1005. Maximize Sum Of Array After K Negations
+Given an array A of integers, we must modify the array in the following way: we choose an i and replace A[i] with -A[i], 
+and we repeat this process K times in total.  (We may choose the same index i multiple times.)  
+Return the largest possible sum of the array after modifying it in this way.
+class Solution {
+    public int largestSumAfterKNegations(int[] A, int K) {
+        int sum = 0;
+        int count = 0;
+        for (int i : A){
+            if (i<0){
+                count++;
+            }
+        }
+        Arrays.sort(A);
+        if (K<= count){
+            for (int i=0; i<K; i++ ){
+                sum -= A[i];
+            }
+            for (int i =K; i< A.length; i++){
+                sum += A[i];
+            }
+        } else{
+            if ((K-count)%2==0){
+                for (int i : A){
+                    sum += Math.abs(i);
+                }
+            } else{
+                for (int i :A){
+                    sum += Math.abs(i);}
+                    if (count ==0){sum -=2 * A[0];
+                                  
+                } else{
+                        sum -=2 * Math.min(Math.abs(A[count-1]),Math.abs(A[count]));
+                    }
+            }
+        }
+         return sum;
+    }
+}
