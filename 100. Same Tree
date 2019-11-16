@@ -1,0 +1,44 @@
+100. Same Tree
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        List<TreeNode> list1 = new ArrayList();
+        List<TreeNode> list2 = new ArrayList();
+        treeNodeList(list1, p);
+        treeNodeList(list2, q);
+        boolean flag = true;
+        if (list1.size() != list2.size()){flag =false;}
+        for (int i = 0; i< list1.size(); i++){
+            if((list1.get(i) == null)&& (list2.get(i) != null)){
+                flag = false;
+                break;
+            } else if ((list2.get(i) == null)&& (list1.get(i) != null)){
+                flag = false;
+                break;
+            } else if ((list1.get(i) != null)&& (list2.get(i) != null)){
+                if (list1.get(i).val != list2.get(i).val){
+                      flag = false;
+                break;
+                }
+            } 
+            
+          
+        }  return flag;
+    }
+    
+    public void treeNodeList(List<TreeNode> list, TreeNode p){
+        list.add(p);
+        if(p!= null){ 
+            treeNodeList(list,p.left);
+            treeNodeList(list,p.right);        
+        }
+    }
+}
