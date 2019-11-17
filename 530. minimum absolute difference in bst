@@ -1,0 +1,33 @@
+530. minimum absolute difference in bst
+Given a binary search tree with non-negative values, find the minimum absolute difference between values of any two nodes.
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    ArrayList<Integer> newArr = new ArrayList();
+    public int getMinimumDifference(TreeNode root) {
+        getValue(newArr, root);
+        int result = Integer.MAX_VALUE;
+        for (int i=0 ; i< newArr.size()-1; i++){
+            if(Math.abs(newArr.get(i+1)-newArr.get(i))< result){
+                result = Math.abs(newArr.get(i+1)-newArr.get(i));
+            }
+        }
+        return result;
+    }
+    
+    public void getValue( ArrayList<Integer> newArr, TreeNode root){
+        if(root == null){return;}
+        if (root. left != null) {
+            getValue(newArr,  root.left);}
+        newArr.add(root.val);
+        if(root.right != null) {
+            getValue(newArr,  root.right);}
+    }
+}
