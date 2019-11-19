@@ -1,0 +1,37 @@
+107. Binary Tree Level Order Traversal II
+Given a binary tree, return the bottom-up level order traversal of its nodes' values. (ie, from left to right, level by level from leaf to root).
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> result = new ArrayList();
+        Stack<List<Integer>> stack = new Stack();
+        if (root == null){return result;}
+        Queue <TreeNode> queue = new LinkedList();
+        queue.add(root);
+        while (queue.size() != 0){
+            List<Integer> list = new ArrayList();
+            Queue <TreeNode> child = new LinkedList();
+            while(queue.size()!=0){
+                TreeNode node = queue.poll();
+                list.add(node.val);
+                if (node.left != null ){child.add(node.left);}
+                if (node.right != null ){child.add(node.right);}
+            }
+            queue = child;
+            stack.push(list);
+                    
+        }
+        while(!stack.isEmpty()){
+            result.add(stack.pop());
+        }
+        return result;
+    }
+}
