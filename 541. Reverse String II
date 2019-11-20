@@ -1,0 +1,45 @@
+541. Reverse String II
+class Solution {
+    public String reverseStr(String s, int k) {
+        int num = s.length()%(2*k);
+        int first = 0;
+        int last = 0;
+        char temp = 'a';
+        char [] arr = s.toCharArray();
+       for (int i = 0; i< s.length()-num; i+=2*k){
+           first = i;
+           last = i+k-1;
+           while(first < last){
+               temp = arr[first];
+               arr[first] = arr[last];
+               arr[last]= temp;
+               first++;
+               last--;
+           }
+       }
+        if (num>=k){
+            first = s.length()-num;
+            last = first+k-1;
+                while(first < last){
+               temp = arr[first];
+               arr[first] = arr[last];
+               arr[last]= temp;
+               first++;
+               last--;
+           }
+        } else{
+            first = s.length()-num;
+            last = s.length()-1;
+                    while(first < last){
+               temp = arr[first];
+               arr[first] = arr[last];
+               arr[last]= temp;
+               first++;
+               last--;
+           }
+            
+        }
+        return new String(arr);
+    
+    }
+}
