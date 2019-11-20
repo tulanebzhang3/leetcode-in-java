@@ -1,0 +1,25 @@
+119. Pascal's Triangle II
+Given a non-negative index k where k ≤ 33, return the kth index row of the Pascal's triangle.
+Note that the row index starts from 0.
+class Solution {
+    public List<Integer> getRow(int rowIndex) {
+        List<Integer> list = new ArrayList();
+        if(rowIndex ==0) {list.add(1); return list;}
+        int [] arr1 = new int[rowIndex+1];
+        arr1[0]=1;
+        arr1[1]=1;
+        for(int k = 1; k<rowIndex; k++){
+            int [] arr2 = new int[rowIndex+1];
+            arr2[0]=1;
+            for (int i =1; i< rowIndex; i++){
+                arr2[i]= arr1[i-1] + arr1[i];
+            }
+            arr1 = arr2;
+        }
+        arr1[rowIndex]=1;
+        for(int i : arr1){
+            list.add(i);
+        }
+        return list;
+    }
+}
