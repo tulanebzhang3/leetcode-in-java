@@ -1,0 +1,42 @@
+703. Kth Largest Element in a Stream
+Design a class to find the kth largest element in a stream. Note that it is the kth largest element in the sorted order, 
+not the kth distinct element.  Your KthLargest class will have a constructor which accepts an integer k and an integer array
+nums, which contains initial elements from the stream. For each call to the method KthLargest.add, return the element 
+representing the kth largest element in the stream.
+class KthLargest {
+    int k;
+    int [] nums;
+
+    public KthLargest(int k, int[] nums) {
+        this.k = k;
+        this.nums = nums;
+        Arrays.sort(nums);
+    }
+    
+    public int add(int val) {
+        int[] arr = new int [nums.length+1];
+        int index = 0;
+        while (index <nums.length){
+            if (nums[index]< val){
+                arr[index] = nums[index];
+                index++;
+            }else{
+                break;
+            }
+        }
+        arr[index] = val;
+        for (int i = index +1; i< arr.length; i++){
+            arr[i] = nums[i-1];
+        }
+        nums = arr;
+        return nums[nums.length -k];
+        
+        
+    }
+}
+
+/**
+ * Your KthLargest object will be instantiated and called as such:
+ * KthLargest obj = new KthLargest(k, nums);
+ * int param_1 = obj.add(val);
+ */
