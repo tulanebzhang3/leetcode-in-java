@@ -1,0 +1,33 @@
+830. Positions of Large Groups
+In a string S of lowercase letters, these letters form consecutive groups of the same character.  
+For example, a string like S = "abbxxxxzyy" has the groups "a", "bb", "xxxx", "z" and "yy".  
+Call a group large if it has 3 or more characters.  We would like the starting and ending positions of every large group.  
+The final answer should be in lexicographic order.
+
+class Solution {
+    public List<List<Integer>> largeGroupPositions(String S) {
+        int [] arr = new int [S.length()];
+        int index = 0;
+        for (int i = 0; i< S.length()-1; i++){
+            if(S.charAt(i+1) != S.charAt(i)){
+                index++;
+            } else{
+                arr[index]++;
+            }
+        }
+        List<List<Integer>> list = new ArrayList();
+        int start = 0;
+        for (int i = 0; i< arr.length; i++){
+            if(arr[i] <=1){
+                start += arr[i]+1;
+            } else{
+               List<Integer> newlist = new ArrayList();
+                newlist.add(start);
+                newlist.add(start + arr[i]);
+                start += arr[i]+1;
+                list.add(newlist);
+            }
+        }
+        return list;
+    }
+}
