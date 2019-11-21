@@ -1,0 +1,42 @@
+598. Range Addition II
+Given an m * n matrix M initialized with all 0's and several update operations.  Operations are represented by a 2D array,
+and each operation is represented by an array with two positive integers a and b,
+which means M[i][j] should be added by one for all 0 <= i < a and 0 <= j < b.
+You need to count and return the number of maximum integers in the matrix after performing all the operations.
+class Solution {
+    public int maxCount(int m, int n, int[][] ops) {
+        if (ops.length ==0){return m*n;}
+        int [] x = new int [ops.length];
+        int [] y = new int[ ops.length];
+        for(int i = 0; i< x.length; i++){
+            x[i] = ops[i][0];
+        }
+          for(int i = 0; i< x.length; i++){
+            y[i] = ops[i][1];
+        }
+        int min1 = Integer.MAX_VALUE;
+        int min2 = Integer.MAX_VALUE;
+        for (int i : x){
+            if (i<min1){
+                min1 = i;
+            }
+        }
+                for (int i : y){
+            if (i<min2){
+                min2 = i;
+            }
+        }
+        return min1*min2;
+        
+    }
+}
+
+public class Solution {
+    public int maxCount(int m, int n, int[][] ops) {
+        for (int[] op: ops) {
+            m = Math.min(m, op[0]);
+            n = Math.min(n, op[1]);
+        }
+        return m * n;
+    }
+}
