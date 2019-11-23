@@ -1,0 +1,33 @@
+1175. Prime Arrangements
+Return the number of permutations of 1 to n so that prime numbers are at prime indices (1-indexed.)  
+(Recall that an integer is prime if and only if it is greater than 1, 
+and cannot be written as a product of two positive integers both smaller than it.)  Since the answer may be large,
+return the answer modulo 10^9 + 7.
+class Solution {
+    public int numPrimeArrangements(int n) {
+        int primeNum = 0;
+        boolean flag = true;
+        for (int i =2; i <=n; i++){
+            for (int j = 2; j*j <=i; j++){
+                if (i%j==0){
+                    flag = false;
+                    break;
+                }
+            }
+            if(flag == true){ primeNum++;} else{flag = true;}
+        }
+        long prime = 1L;
+        for (int i = primeNum; i>0; i--){
+            prime*=i;
+            prime %= 1000000007;
+        }
+        long num = 1;
+        for (int i = n-primeNum; i>0; i--){
+            num *= i;
+            num %= 1000000007;
+        }
+        int result = (int) (num*prime%1000000007);
+        
+        return result;
+    }
+}
