@@ -1,0 +1,32 @@
+551. Student Attendance Record I
+You are given a string representing an attendance record for a student. The record only contains the following three characters:
+'A' : Absent. 'L' : Late. 'P' : Present. A student could be rewarded if his attendance record doesn't contain more than one 'A' (absent)
+or more than two continuous 'L' (late).  You need to return whether the student could be rewarded according to his attendance record.
+class Solution {
+    public boolean checkRecord(String s) {
+        char[] A = s.toCharArray();
+        boolean flag =true;
+        int countA = 0;
+        int index = 0;
+        while(index < A.length-2){
+            if (A[index] == 'A'){
+                countA++;
+            } else if (A[index]== 'L'){
+                if(A[index+1]=='L' &&A[index+2] == 'L'){
+                    flag = false;
+                    break;
+                }
+            }
+            index++;
+        }
+        while(index< A.length){
+            if(A[index] == 'A'){
+                countA++;
+            }
+            index++;
+        }
+        if (countA>1) flag = false;
+        return flag;
+      
+    }
+}
