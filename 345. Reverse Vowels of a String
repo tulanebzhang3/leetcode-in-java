@@ -1,0 +1,32 @@
+345. Reverse Vowels of a String
+Write a function that takes a string as input and reverse only the vowels of a string.
+class Solution {
+    public String reverseVowels(String s) {
+        char [] ch = s.toCharArray();
+        int len = s.length();
+        int i = 0;
+        int j = len-1;
+        char temp = 'a';
+        while (i<j){
+            while(i<j && !isVowels(ch[i])){
+                i++;
+            }
+            while(i<j && !isVowels(ch[j])){
+                j--;
+            }
+            if(i<j){
+                temp = ch[i];
+                ch[i] = ch[j];
+                ch[j] = temp;
+                i++;
+                j--;
+            }
+            
+        }
+        return new String(ch);
+    }
+    
+    public boolean isVowels(char c){
+        return c == 'A' ||c == 'I' ||c == 'E' ||c == 'O' ||c == 'U' ||c == 'a' ||c == 'i' ||c == 'e' ||c == 'o' ||c == 'u' ;
+    }
+}
