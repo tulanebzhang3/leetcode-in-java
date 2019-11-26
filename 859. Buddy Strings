@@ -1,0 +1,46 @@
+859. Buddy Strings
+Given two strings A and B of lowercase letters, return true if and only if we can swap two letters in A so that the result
+equals B.
+class Solution {
+    public boolean buddyStrings(String A, String B) {
+        boolean flag = true;
+        if (A.length() == 0 || B.length() ==0){return false;}
+        if (A.equals(B)) {
+            int [] arr = new int [26];
+            for (char ch : A.toCharArray()){
+                arr[ch-'a']++;
+            }
+            for (int i : arr){
+                if (i > 1){return true;}
+            }
+            return false;
+        }
+        if (A.length() != B.length()){return false;}
+        int first = 0;
+        while (first < A.length()){
+            if (A.charAt(first) == B.charAt(first)){
+                first++;
+            } else{
+                break;
+            }
+        }
+        if (first == A.length()-1){ return false;}
+        int second = first +1;
+        while (second < A.length()){
+            if (A.charAt(second) == B.charAt(second)){
+                second++;
+            } else{
+                if (A.charAt(first) != B.charAt(second)|| A.charAt(second) != B.charAt(first)){
+                    return false;
+                } else{
+                    break;}}}
+        if (second == A.length()){return false;}
+        int third = second + 1;
+        while(third < A.length()){
+            if (A.charAt(third) != B.charAt(third)){
+                return false;
+            } else{
+                third++;
+            }
+        }
+        return flag;}}     
