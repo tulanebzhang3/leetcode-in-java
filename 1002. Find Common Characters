@@ -1,0 +1,38 @@
+1002. Find Common Characters
+Given an array A of strings made only from lowercase letters, return a list of all characters that show up in all strings 
+within the list (including duplicates).  For example, if a character occurs 3 times in all strings but not 4 times, 
+you need to include that character three times in the final answer.  You may return the answer in any order.
+class Solution {
+    public List<String> commonChars(String[] A) {
+        List<String> answer = new ArrayList<String>();
+        int [] arr = new int[26];
+        for (char ch : A[0].toCharArray()){
+            arr[ch-'a']++;
+        }
+        int [] compare = new int[26];
+        for (int i = 1; i< A.length; i++){
+            for (char ch: A[i].toCharArray()){
+                compare[ch-'a']++;
+            }
+            for (int k = 0; k< arr.length; k++){
+                if (arr[k] > compare[k]){
+                    arr[k] = compare[k];
+                }
+            }
+            for (int k = 0 ; k< compare.length; k++){
+                compare[k] =0;
+            }
+        }
+        
+        for (int i = 0; i< arr.length; i++){
+            if (arr[i] !=0){
+                for (int j = 0; j< arr[i]; j++){
+                    String letter = (char)(i + 97) +"";
+                    answer.add(letter);
+                }
+            }
+        }
+        return answer;
+        
+    }
+}
