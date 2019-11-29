@@ -1,0 +1,35 @@
+438. Find All Anagrams in a String
+Given a string s and a non-empty string p, find all the start indices of p's anagrams in s.  
+Strings consists of lowercase English letters only and the length of both strings s and p will not be larger than 20,100.  
+The order of output does not matter.
+class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> list = new ArrayList();
+        if(s.length()< p.length()) {return list;}
+        int len = p.length();
+        for (int i = 0; i < s.length()-len+1; i++){
+            if (isAnagrams(s.substring(i, i+len), p)){
+                list.add(i);
+            }
+        }
+        return list;
+        
+    }
+    
+    public boolean isAnagrams(String s, String p){
+        int [] arrs = new int [26];
+        int [] arrp = new int [26];
+        for (char ch : s.toCharArray()){
+            arrs[ch-'a']++;
+        }
+        for (char ch : p.toCharArray()){
+            arrp[ch-'a']++;
+        }
+        for (int i =0; i< arrs.length; i++){
+            if (arrs[i] != arrp[i]){
+                return false;
+            }
+        }
+        return true;
+    }
+}
