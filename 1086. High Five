@@ -1,0 +1,45 @@
+1086. High Five
+Given a list of scores of different students, return the average score of each student's top five scores in the order of 
+each student's id.  Each entry items[i] has items[i][0] the student's id, and items[i][1] the student's score. 
+The average score is calculated using integer division.
+class Solution {
+    public int[][] highFive(int[][] items) {
+        Map <Integer, List<Integer>> map = new HashMap();
+        for (int [] arr : items){
+            if (map.get(arr[0]) == null){
+                List<Integer> list = new ArrayList();
+                list.add(arr[1]);
+                map.put(arr[0], list);   
+            } else{
+                map.get(arr[0]).add(arr[1]);
+            }
+        }
+        int [][] result = new int[map.size()][2];
+        int index = 0;
+        for (Integer key : map.keySet()){
+            Collections.sort(map.get(key));
+            int sum = 0;
+            for (int i = map.get(key).size()-1; i>=map.get(key).size()-5; i--){
+                sum += map.get(key).get(i);
+            }
+            int avg = sum/5;
+            result[index][0] = key;
+            result[index][1] = avg;
+            index++;
+            
+        }
+        for (int i = 0; i < result.length-1; i++){
+            int min = i;
+            for (int j = i+1; j < result.length; j++){
+                if( result [j][0] < result[min][0]){
+                    min = j;
+                }
+            }
+            int [] temp = new int[2];
+            temp = result[i];
+            result[i] = result[min];
+            result[min] = temp;
+        }
+        return result;
+    }
+}
