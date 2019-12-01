@@ -1,0 +1,25 @@
+784. Letter Case Permutation
+Given a string S, we can transform every letter individually to be lowercase or uppercase to create another string.
+Return a list of all possible strings we could create.
+class Solution {
+    public List<String> letterCasePermutation(String S) {
+        List<String> result = new ArrayList();
+        buildList(result,0,S,"");
+        return result;
+    }
+    
+    public void buildList(List<String> list, int index, String source, String newString ){
+        if (newString.length() == source.length()){
+            list.add(newString);
+        } else{ 
+            buildList(list, index+1, source, newString+source.charAt(index));
+            if(Character.isUpperCase(source.charAt(index))){
+                String lowcase = (source.charAt(index)+"").toLowerCase();
+                buildList(list,index+1,source,newString+lowcase);
+            } else if(Character.isLowerCase(source.charAt(index))){
+                String upcase = (source.charAt(index)+"").toUpperCase();
+                buildList(list,index+1, source, newString+upcase);
+            }
+        }
+    }
+}
