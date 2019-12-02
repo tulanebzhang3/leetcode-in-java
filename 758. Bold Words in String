@@ -1,0 +1,40 @@
+758. Bold Words in String
+Given a set of keywords words and a string S, make all appearances of all keywords in S bold. Any letters between <b> and </b> tags
+become bold.  The returned string should use the least number of tags possible, and of course the tags should form a valid combination. 
+For example, given that words = ["ab", "bc"] and S = "aabcd", we should return "a<b>abc</b>d". Note that returning "a<b>a<b>b</b>c</b>d"
+would use more tags, so it is incorrect.
+class Solution {
+    public String boldWords(String[] words, String S) {
+        if (S.length() == 0) {return S;}
+        boolean [] bold = new boolean [S.length()];
+        for (int i = 0; i< S.length(); i++){
+            for (String word : words){
+                if(i+word.length() <= S.length()){
+                if(S.substring(i,i+word.length()).equals(word)){
+                    for(int k = i; k< i+word.length(); k++){
+                        bold[k] = true;
+                        }
+                    }
+                }
+            }
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i= 0; i< S.length(); i++){
+            if(bold[i] ==  false){
+                sb.append(S.charAt(i));
+            } else{
+                int j = i;
+                while(j< S.length()){
+                    if(bold[j]){
+                        j++;
+                    }else{
+                        break;
+                    }
+                }
+                sb.append("<b>" + S.substring(i,j) + "</b>");
+                i=j-1;
+                }
+        }
+        return sb.toString();
+    }
+}
