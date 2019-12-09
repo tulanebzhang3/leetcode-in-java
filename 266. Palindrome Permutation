@@ -1,0 +1,26 @@
+266. Palindrome Permutation
+Given a string, determine if a permutation of the string could form a palindrome.
+class Solution {
+    public boolean canPermutePalindrome(String s) {
+        HashMap <Character, Integer> map = new HashMap();
+        for (char ch : s.toCharArray()){
+            if (map.get(ch) == null){
+                map.put(ch, 1);
+            }else{
+                map.put(ch, map.get(ch)+1);
+            }
+        }
+        boolean flag = false;
+        boolean result = true;
+        for (char ch : map.keySet()){
+            if (map.get(ch) %2!=0){
+                if(flag){
+                    result = false;
+                }else{
+                    flag = true;
+                }
+            }
+        }
+        return result;
+    }
+}
