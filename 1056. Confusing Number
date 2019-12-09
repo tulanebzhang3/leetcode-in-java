@@ -1,0 +1,28 @@
+1056. Confusing Number
+Given a number N, return true if and only if it is a confusing number, which satisfies the following condition:  
+We can rotate digits by 180 degrees to form new digits. When 0, 1, 6, 8, 9 are rotated 180 degrees,
+they become 0, 1, 9, 8, 6 respectively. When 2, 3, 4, 5 and 7 are rotated 180 degrees, they become invalid. 
+A confusing number is a number that when rotated 180 degrees becomes a different number with each digit vali
+class Solution {
+    public boolean confusingNumber(int N) {
+        String num = N+"";
+        char [] resultS= new char [num.length()];
+        char [] pair = new char[10];
+        pair[0] ='0';
+        for (int i = 1; i< pair.length; i++){
+            pair[i] =(char)(pair[i-1] +1);
+        }
+        pair[6] ='9';
+        pair[9] ='6';
+        for (int i = 0, j = num.length()-1; i < num.length(); i++,j--){
+            if (num.charAt(i) == '2' ||num.charAt(i) == '3' ||num.charAt(i) == '4' ||num.charAt(i) == '5' ||num.charAt(i) == '7'){
+                return false;                
+            } else{
+                resultS[j] = pair[num.charAt(i)-48];
+            }
+            
+    }
+        String rotate = new String(resultS);
+        return !rotate.equals(num);
+}
+}
