@@ -1,0 +1,37 @@
+55. Jump Game
+Given an array of non-negative integers, you are initially positioned at the first index of the array.  
+Each element in the array represents your maximum jump length at that position.  Determine if you are able to reach the 
+last index.
+class Solution {
+    public boolean canJump(int[] nums) {
+        boolean[] step = new boolean[nums.length];
+        step [0] = true;
+        for (int i = 0; i< nums.length; i++){
+            if (step[i] == true){
+                if(i>0 && i+ nums[i] <= i-1 +nums[i-1]){
+                    continue;
+                }
+                for (int j = i; j< step.length && j<= i+ nums[i] ; j++){
+                    step[j] = true;
+                    if(step[nums.length-1] == true){
+                        return true;
+                    }
+                }
+            }
+        }
+        return step[nums.length-1];
+    }
+}
+
+class Solution {
+    public boolean canJump(int[] nums) {
+        int len = nums.length;
+        int target = nums.length -1;
+        for (int i = len-1; i >=0 ; i--){
+            if(i + nums[i] >= target){
+                target = i;
+            }
+}
+        return target ==0;
+    }
+}
