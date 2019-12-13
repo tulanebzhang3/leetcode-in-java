@@ -1,0 +1,34 @@
+13. Roman to Integer
+class Solution {
+    public int romanToInt(String s) {
+        int answer = 0;
+        Map <Character , Integer> map = new HashMap();
+        map.put ('I' ,1 );
+        map.put ('V' ,5 );
+        map.put ('X' ,10 );
+        map.put ('L' ,50 );
+        map.put ('C' ,100 );
+        map.put ('D' ,500 );
+        map.put ('M' ,1000 );
+        for (int i = 0; i< s.length()-1; i++){
+            if (isMinus(s.charAt(i), s.charAt(i+1))){
+                answer -= map.get(s.charAt(i));
+            } else{
+                answer += map.get(s.charAt(i));
+            }
+        }
+        answer+=map.get(s.charAt(s.length()-1));
+        return answer;
+        
+    }
+    
+    public boolean isMinus(char a, char b){
+        boolean flag1;
+        boolean flag2;
+        boolean flag3;
+        flag1 = (a == 'I' && (b == 'V' || b == 'X'));
+        flag2 = (a == 'X' && (b == 'L' || b == 'C'));
+        flag3 = (a == 'C' && (b == 'D' || b == 'M'));
+        return flag1 || flag2 || flag3;
+    }
+}
