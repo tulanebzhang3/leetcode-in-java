@@ -1,0 +1,24 @@
+46. Permutations
+Given a collection of distinct integers, return all possible permutations.
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> result = new ArrayList();
+        List<Integer> temp = new ArrayList();
+        helper(result, temp, nums);
+        return result;  
+    }
+    
+    public void helper (List<List<Integer>> result, List<Integer> temp, int[] nums){
+        if(temp.size() == nums.length){
+            result.add(new ArrayList(temp));
+            return;
+        }
+        for ( int num : nums){
+            if(!temp.contains(num)){
+                temp.add(num);
+                helper(result, temp, nums);
+                temp.remove(temp.size()-1);
+            }
+        }
+    }       
+}
