@@ -1,0 +1,30 @@
+39. Combination Sum
+Given a set of candidate numbers (candidates) (without duplicates) and a target number (target), find all unique combinations in 
+candidates where the candidate numbers sums to target. The same repeated number may be chosen from candidates unlimited number of times.
+
+class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        Arrays.sort(candidates);
+        List<List<Integer>> result = new ArrayList();
+        helper(result, new ArrayList(),candidates, target,0, candidates[0]);
+        return result;
+    }
+    
+    public void helper(List<List<Integer>> result, List<Integer>list, int[] candidates, int target, int pos, int limit){
+        if(target == 0){
+            result.add(new ArrayList(list));
+            return;
+        }
+        
+        for(int i = pos; i< candidates.length; i++){
+            if(candidates[i] > target){
+                break;
+            }else{
+                if(candidates[i] < limit){ continue;}
+                list.add(candidates[i]);
+                helper(result, list, candidates, target-candidates[i], pos, candidates[i]);
+                list.remove(list.size()-1);
+            }
+        }
+    }
+}
