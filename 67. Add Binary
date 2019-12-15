@@ -1,0 +1,32 @@
+67. Add Binary
+Given two binary strings, return their sum (also a binary string).  The input strings are both non-empty and contains only characters 1
+or 0.
+class Solution {
+    public String addBinary(String a, String b) {
+        if(a.length() > b.length()){return addBinary(b,a);}
+        int len = a.length();
+        a = new StringBuilder(a).reverse().toString();
+        b = new StringBuilder(b).reverse().toString();
+        StringBuilder sb = new StringBuilder();
+        int i = 0;
+        int j = 0;
+        int overDigit = 0;
+        while(i< len && j<len ){
+            int digit = (a.charAt(i)-'0' + b.charAt(j)-'0'+overDigit)%2;
+            overDigit = (a.charAt(i)-'0' + b.charAt(j)-'0'+overDigit)/2;
+            sb.append(digit);
+            i++;
+            j++;
+        }
+        for (int k = j; k< b.length(); k++){
+            int digit = (b.charAt(k) -'0' + overDigit) %2;
+            overDigit = (b.charAt(k) - '0' + overDigit) /2;
+            sb.append(digit);
+              }
+        if( overDigit !=0) {
+            sb.append(overDigit);
+        }
+        return sb.reverse().toString();
+        
+    }
+}
