@@ -1,0 +1,39 @@
+17. Letter Combinations of a Phone Number
+Given a string containing digits from 2-9 inclusive, return all possible letter combinations that the number could represent. 
+A mapping of digit to letters (just like on the telephone buttons) is given below. Note that 1 does not map to any letters.
+
+class Solution {
+    public List<String> letterCombinations(String digits) {
+        if(digits.length() ==0) {return new ArrayList();}
+        List<String> result = new ArrayList();
+        Map<Character, String> map = new HashMap();
+        map.put('2', "abc");
+        map.put('3', "def");
+        map.put('4', "ghi");
+        map.put('5', "jkl");
+        map.put('6', "mno");
+        map.put('7', "pqrs");
+        map.put('8', "tuv");
+        map.put('9', "wxyz");
+        StringBuilder sb = new StringBuilder();
+        helper(result, map, digits, digits.length(), sb);
+        return result;
+    }
+    
+    public void helper(List<String> result, Map<Character, String> map, String word, int length, StringBuilder s){
+        if (s.length() == length){
+            result.add(s.toString());
+            return;
+        }
+        
+        for(char ch : map.get(word.charAt(0)).toCharArray()){
+            s.append(ch);
+            if(word.length()>1){helper(result, map, word.substring(1), length, s);}
+            else{
+                helper(result, map, "", length, s);
+            }
+            s.deleteCharAt(s.length()-1);
+                
+        }             
+    }
+}
