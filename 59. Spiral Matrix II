@@ -1,0 +1,35 @@
+59. Spiral Matrix II
+Given a positive integer n, generate a square matrix filled with elements from 1 to n2 in spiral order.
+class Solution {
+    public int[][] generateMatrix(int n) {
+        int [][] result = new int[n][n];
+        int row1 = 0;
+        int row2 = n-1;
+        int col1 = 0;
+        int col2 = n-1;
+        int num = 1;
+        while(row1 <= row2 && col1<= col2){
+            for (int col = col1; col <=col2; col++){
+                result[row1][col] = num;
+                num++;
+            }
+            row1++;
+            for (int row = row1; row <= row2; row++){
+                result[row][col2] = num;
+                num++;
+            }
+            col2--;
+            for (int col = col2; col >=col1; col--){
+                result[row2][col] = num;
+                num++;
+            }
+            row2--;
+            for (int row = row2; row >=row1; row--){
+                result[row][col1] = num;
+                num++;
+            }
+            col1++;
+        }
+        return result;
+    }
+}
