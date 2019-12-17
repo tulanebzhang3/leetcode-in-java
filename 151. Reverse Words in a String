@@ -1,0 +1,16 @@
+151. Reverse Words in a String
+Given an input string, reverse the string word by word.
+class Solution {
+    public String reverseWords(String s) {
+        s=s.trim();
+       String [] newS = s.split("\\s+");
+        if(newS.length ==0) {return "";}
+       StringBuilder sb = new StringBuilder();
+        for (int i = newS.length-1; i>0; i--){
+            
+            sb.append(newS[i]+" ");
+        }
+        sb.append(newS[0]);
+        return sb.toString();
+    }
+}
