@@ -1,0 +1,18 @@
+137. Single Number II
+Given a non-empty array of integers, every element appears three times except for one, which appears exactly once. 
+Find that single one.
+class Solution {
+    public int singleNumber(int[] nums) {
+        Set<Long> set = new HashSet();
+        long sum = 0L;
+        for (int num : nums){
+            set.add((long)num);
+            sum += num;
+        }
+        long sum2 = 0L;
+        for (Long num : set){
+            sum2 += num;
+        }
+        return (int)((sum2*3-sum)/2);
+    }
+}
