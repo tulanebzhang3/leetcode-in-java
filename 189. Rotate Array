@@ -1,0 +1,26 @@
+189. Rotate Array
+Given an array, rotate the array to the right by k steps, where k is non-negative.
+class Solution {
+    public void rotate(int[] nums, int k) {
+        if(nums.length == 0 || nums.length ==1 || k==0) {return ;}
+        int realK = k % nums.length;
+        int left = nums.length -realK;
+        int temp = 0;
+        for (int i = 0, j= left-1 ; i< j; i++, j--){
+            temp = nums[i];
+            nums[i] = nums[j];
+            nums[j]= temp;
+        }
+        for (int i = left, j = nums.length-1; i<j; i++, j--){
+            temp = nums[i];
+            nums[i] = nums[j];
+            nums[j]= temp;
+        }
+        for (int i =0, j = nums.length -1; i<j; i++, j--){
+            temp = nums[i];
+            nums[i] = nums[j];
+            nums[j]= temp;
+        }
+        
+    }
+}
