@@ -1,0 +1,30 @@
+246. strobogrammatic number
+A strobogrammatic number is a number that looks the same when rotated 180 degrees (looked at upside down).  Write a function to determine 
+if a number is strobogrammatic. The number is represented as a string.
+class Solution {
+    public boolean isStrobogrammatic(String num) {
+        if (num.length() ==0) return true;
+        int i = 0; int j =num.length()-1;
+        while(i <j){
+            if(isPattern(num.charAt(i), num.charAt(j))){
+                i++;
+                j--;
+            } else{
+            return false;}
+        }
+        if(i==j){
+            if(num.charAt(i) == '1' ||num.charAt(i) == '0'||num.charAt(i) == '8'){
+                return true;
+            }else{return false;}
+        }
+        return true;
+    }
+    
+    public boolean isPattern(char a , char b){
+        if((a=='6' && b=='9') || (a=='9' && b=='6')){return true;}
+        if(a=='0' && b=='0'){return true;}
+        if(a=='1' && b=='1'){return true;}
+        if(a=='8' && b=='8'){return true;}
+        return false;
+    }
+}
