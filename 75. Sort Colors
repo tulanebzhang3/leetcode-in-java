@@ -1,0 +1,31 @@
+75. Sort Colors
+Given an array with n objects colored red, white or blue, sort them in-place so that objects of the same color are adjacent, with the
+colors in the order red, white and blue.  Here, we will use the integers 0, 1, and 2 to represent the color red, white, and blue 
+respectively
+class Solution {
+    public void sortColors(int[] nums) {
+        if(nums.length ==0 || nums.length ==1) {return;}
+        int red = 0;
+        int blue = nums.length-1;
+        for (int i = 0; i<= blue; ){
+            if(nums[i] == 2 && i<=blue){
+                swap(nums, i, blue);
+                blue--;
+            }
+            else if(nums[i] == 0 && i>=red){
+                swap(nums, i, red);
+                red++;
+            }
+            else{
+                i++;
+            }
+        }
+        
+    }
+    
+    public void swap(int[] nums, int i , int j){
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+}
