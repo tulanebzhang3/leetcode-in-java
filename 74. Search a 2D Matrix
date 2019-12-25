@@ -1,0 +1,22 @@
+74. Search a 2D Matrix
+Write an efficient algorithm that searches for a value in an m x n matrix. This matrix has the following properties:  
+Integers in each row are sorted from left to right. The first integer of each row is greater than the last integer of the previous row.
+
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        if(matrix.length ==0) {return false;}
+        int start = 0;
+        int end = matrix.length * matrix[0].length -1;
+        while(start <= end){
+            int middle = start + (end-start)/2;
+            if(matrix[middle/matrix[0].length][middle%matrix[0].length] == target){
+                return true; 
+            }else if (matrix[middle/matrix[0].length][middle%matrix[0].length] > target){
+                end = middle-1;
+            } else{
+                start = middle+1;
+            }
+        }
+        return false;
+    }
+}
