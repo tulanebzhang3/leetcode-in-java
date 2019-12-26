@@ -1,0 +1,19 @@
+422. Valid Word Square
+Given a sequence of words, check whether it forms a valid word square.  A sequence of words forms a valid word square if the kth row and
+column read the exact same string, where 0 ≤ k < max(numRows, numColumns).
+class Solution {
+    public boolean validWordSquare(List<String> words) {
+        if(words == null || words.size() == 0){return true;}
+        for(int i = 0; i< words.size(); i++){
+            String word = words.get(i);
+            String compare = "";
+            for(int j = 0; j< words.size() && i< words.get(j).length(); j++){
+                compare = compare + Character.valueOf(words.get(j).charAt(i));
+            }
+            if(!compare.equals(word)){
+                return false;
+            }
+        }
+        return true;
+    }
+}
