@@ -1,0 +1,30 @@
+415. Add Strings
+Given two non-negative integers num1 and num2 represented as string, return the sum of num1 and num2.
+class Solution {
+    public String addStrings(String num1, String num2) {
+        String n1 = new StringBuilder(num1).reverse().toString();
+        String n2 = new StringBuilder(num2).reverse().toString();
+        int[] resultArr = new int[Math.max(n1.length(),n2.length()) +1];
+        int[] newNum1 = new int[resultArr.length];
+        int[] newNum2 = new int[resultArr.length];
+        for(int i = 0; i< n1.length(); i++){
+            newNum1[i] = n1.charAt(i)-'0';
+        }
+        for(int i = 0; i< n2.length(); i++){
+            newNum2[i] = n2.charAt(i)-'0';
+        }
+        for (int i = 0; i< resultArr.length-1; i++ ){
+            resultArr[i] += newNum1[i] + newNum2[i];
+            resultArr[i+1] += resultArr[i]/10;
+            resultArr[i] = resultArr[i]%10;
+        }
+        StringBuilder sb = new StringBuilder();
+        for(int i = resultArr.length-1; i>=0; i--){
+            if(resultArr[i] != 0 || sb.length()!=0){
+                sb.append(resultArr[i]);
+            }
+        }
+        if(sb.length() == 0) {return "0";}
+        return sb.toString();
+    }
+}
