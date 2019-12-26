@@ -1,0 +1,29 @@
+434. Number of Segments in a String
+Count the number of segments in a string, where a segment is defined to be a contiguous sequence of non-space characters.  
+Please note that the string does not contain any non-printable characters.
+class Solution {
+    public int countSegments(String s) {
+        if(s.length() == 0){return 0;}
+        if(s.length() == 1){
+            if (s.charAt(0) == ' '){
+                return 0;
+            } else {
+                return 1;
+            }
+        }
+        s= s.trim();
+        int number = 0;
+        boolean flag = false;
+        for(int i =1; i< s.length(); i++ ){
+            if(s.charAt(i) == ' ' && s.charAt(i-1) != ' '){
+                number ++;
+            }
+            if(s.charAt(i) != ' '){
+                flag = true;
+            }
+        }
+        if (number == 0 && !flag) return 0; else{
+            return number+1;
+        }
+    }
+}
