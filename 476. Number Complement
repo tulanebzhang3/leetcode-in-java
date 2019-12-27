@@ -1,0 +1,18 @@
+476. Number Complement
+Given a positive integer, output its complement number. The complement strategy is to flip the bits of its binary 
+representation.
+class Solution {
+    public int findComplement(int num) {
+        String s = Integer.toBinaryString(num);
+        StringBuilder sb = new StringBuilder();
+        for(char ch : s.toCharArray()){
+            if(ch =='1'){
+                sb.append('0');
+            }else{
+                sb.append('1');
+            }
+        }
+        int number = Integer.parseInt(sb.toString(), 2);
+        return number;
+    }
+}
