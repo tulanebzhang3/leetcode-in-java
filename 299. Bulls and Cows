@@ -1,0 +1,35 @@
+299. Bulls and Cows
+You are playing the following Bulls and Cows game with your friend: You write down a number and ask your friend to guess what the number 
+is. Each time your friend makes a guess, you provide a hint that indicates how many digits in said guess match your secret number exactly 
+in both digit and position (called "bulls") and how many digits match the secret number but locate in the wrong position (called "cows"). 
+Your friend will use successive guesses and hints to eventually derive the secret number.  Write a function to return a hint according to
+the secret number and friend's guess, use A to indicate the bulls and B to indicate the cows.   Please note that both secret number and 
+friend's guess may contain duplicate digits.
+class Solution {
+    public String getHint(String secret, String guess) {
+        int[] arr = new int[10];
+        for(char ch : secret.toCharArray()){
+            arr[ch-'0']++;
+        }
+        int i = 0; int j = 0; int numofB = 0; int numofA =0;
+        while(i< secret.length()){
+            if(secret.charAt(i) == guess.charAt(j)){
+                numofA++;
+                arr[secret.charAt(i)-'0']--;
+            }
+            i++;
+            j++;
+        }
+        i=0; j=0;
+        while(j< guess.length()){
+            if(secret.charAt(i) != guess.charAt(j) && arr[guess.charAt(j)-'0']!=0){
+                numofB++;
+                arr[guess.charAt(j)-'0']--;
+            }
+            j++;
+            i++;
+        }
+        
+        return numofA + "A" +numofB +"B";
+    }
+}
