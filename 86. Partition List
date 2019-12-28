@@ -1,0 +1,34 @@
+86. Partition List
+Given a linked list and a value x, partition it such that all nodes less than x come before nodes greater than or equal to x.
+You should preserve the original relative order of the nodes in each of the two partitions.
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode partition(ListNode head, int x) {
+        if(head == null){return null;}
+        ListNode small = new ListNode(-1);
+        ListNode newHead1 = small;
+        ListNode big = new ListNode(-1);
+        ListNode newHead2 = big;
+        while(head != null){
+            if(head.val < x){
+                small.next = head;
+                small = head;
+                head = head.next;
+            } else {
+                big.next = head;
+                big = head;
+                head = head.next;
+            } 
+        }
+        big.next = null;
+        small.next = newHead2.next;
+        return newHead1.next;
+    }
+}
