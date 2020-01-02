@@ -1,0 +1,33 @@
+1065. Index Pairs of a String
+Given a text string and words (a list of strings), return all index pairs [i, j] so that the substring text[i]...text[j] is in the list of 
+words.
+class Solution {
+    public int[][] indexPairs(String text, String[] words) {
+         ArrayList<int[]> list = new ArrayList<int[]>();
+        for(String word : words){
+            for(int i = 0; i< text.length()-word.length()+1; i++){
+                if(word.equals(text.substring(i,i+word.length()))){
+                    int[] arr = new int[2];
+                    arr[0] = i;
+                    arr[1] = i+ word.length()-1;
+                    list.add(arr);
+                }
+            }
+        }
+        Collections.sort(list, new ArrSort());
+        int[][] result = new int[list.size()][2];
+        for(int i = 0; i < result.length; i++){
+            result[i] = list.get(i);
+        }
+        return result;
+    }
+}
+
+class ArrSort implements Comparator<int[]>{
+    public int compare(int[] a, int[] b){
+        if(a[0] != b[0]) {return a[0]-b[0];}
+        else{
+            return a[1]-b[1];
+        }
+    }
+}
